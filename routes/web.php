@@ -46,7 +46,7 @@ Route::middleware([
 Route::post('/category/add', [CategoryController::class, 'store'])->name('store.category');
 
 Route::get('/category', [CategoryController::class, 'index'])->name('index.category');
-
+Route::get('category/edit/{$id}', [CategoryController::class, 'edit']);
 // Journal Issues Controller
 Route::post('/issue/add', [IssueController::class, 'store'])->name('store.issue');
 

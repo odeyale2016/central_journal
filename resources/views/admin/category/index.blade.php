@@ -42,10 +42,11 @@
                               <td>{{ $category->issn}}</td>
                               <td>{{ $category->description}}</td>
                               <td>{{ $category->created_at->diffForHumans()}}</td>
-                              <td><a href=""><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a>
-             
+                             <td><a href="{{url('category/edit/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a>
+                                <!--<td><a href="class="btn btn-danger>Delete</a>
+                                  <a href="class="btn btn-info>Edit</a></td>-->
                                 <div style="height:25px;"></div>
-                              <form class="form-group pull-right" method="post" action="/admin/categorys/{{$category->id}}">
+                              <form class="form-group pull-right" method="post" action="/admin/category/{{$category->id}}">
                                  {{csrf_field()}}
                                  <input type="hidden" name="_method" value="DELETE">
                              <input type="submit" value="Delete" class="btn btn-danger" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">

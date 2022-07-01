@@ -71,7 +71,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories=Category::findorFail($id);
+
+        //$roles=Role::lists('name','id')->all();
+       
+        return view('admin.category.edit', compact('categories'));
     }
 
     /**
@@ -83,7 +87,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       /*  $categories=Project::findorFail($id);
+        $categories->update($request->all());
+        session()->flash('message','Records updated Successfully');
+        return redirect('admin/category'); */
     }
 
     /**
