@@ -45,7 +45,7 @@
                               <td><a href=""><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a>
              
                                 <div style="height:25px;"></div>
-                              <form class="form-group pull-right" method="post" action="/admin/issues/{{$issue->id}}">
+                              <form class="form-group pull-right" method="post" action="/admin/issue/{{$issue->id}}">
                                  {{csrf_field()}}
                                  <input type="hidden" name="_method" value="DELETE">
                              <input type="submit" value="Delete" class="btn btn-danger" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">

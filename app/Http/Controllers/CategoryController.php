@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     /**
@@ -71,10 +72,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        // for Eloquent ORM Edit
         $categories=Category::findorFail($id);
 
-        //$roles=Role::lists('name','id')->all();
-       
+        //for query Builder Edit
+        //$categories = DB::table('categories')->where('id', $id)->first();
         return view('admin.category.edit', compact('categories'));
     }
 
@@ -87,10 +89,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-       /*  $categories=Project::findorFail($id);
-        $categories->update($request->all());
-        session()->flash('message','Records updated Successfully');
-        return redirect('admin/category'); */
+        // Eloquent ORM Update
+        //$categories=Category::findorFail($id);
+        //$categories->update($request->all());
+        //session()->flash('message','Records updated Successfully');
+        //return redirect('admin/category'); 
+        // Query Builder Update
+        $data = array();
+        $data['cat_name'] = $request->cat_name;
+        $data['issn'] = $request->issn;
+        $data['description'] = $request->description;
+        DB::table('categories')->where('id', $id)->update($data);
+        return redirect()->route('index.category')->with('success', 'Category updated successful');
+
+        
     }
 
     /**

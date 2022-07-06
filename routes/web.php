@@ -34,9 +34,7 @@ Route::middleware([
     Route::get('/category/add', function () {
         return view('cat_all');
     })->name('cat_all');
-    Route::get('/issue', function () {
-        return view('issue');
-    })->name('issue');
+     
     Route::get('/journal', function () {
         return view('journal');
     })->name('journal');
@@ -46,9 +44,10 @@ Route::middleware([
 Route::post('/category/add', [CategoryController::class, 'store'])->name('store.category');
 
 Route::get('/category', [CategoryController::class, 'index'])->name('index.category');
-Route::get('category/edit/{$id}', [CategoryController::class, 'edit']);
+Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
+Route::post('/category/update/{id}', [CategoryController::class, 'update']);
 // Journal Issues Controller
-Route::post('/issue/add', [IssueController::class, 'store'])->name('store.issue');
+Route::post('/issue/add', [IssueController::class, 'store'])->name('issue.add');
 
 Route::get('/issue', [IssueController::class, 'index'])->name('index.issue');
 

@@ -74,7 +74,11 @@ class IssueController extends Controller
      */
     public function edit($id)
     {
-        //
+        $issues=Issues::find($id);
+        return view('admin.issue.edit', compact('issues'));
+
+        //$roles=Role::lists('name','id')->all();
+       
     }
 
     /**

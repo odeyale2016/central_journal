@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Journals') }}
+            {{ __('Edit Issues') }}
         </h2>
          
     </x-slot>
@@ -29,11 +29,11 @@
                         <div class="card-header">
 <strong>Edit Journal</strong> </div>
                           <div class="card-body">
-                          <form method="POST" action="{{url('category/update/'.$categories->id)}} ">
+                          <form method="POST" action=" ">
                             @csrf
                             <div class="col-md-6">
-                              <label for="cat_name" class="form-label">Journal Name</label>
-                              <input type="text" class="form-control" id="cat_name" name="cat_name" value="{{$categories->cat_name}}">
+                              <label for="journalName" class="form-label">Journal Name</label>
+                              <input type="text" class="form-control" id="journalName" name="journalName" value="{{$categories->cat_name}}">
                             </div>
                             <div class="col-md-6">
                               <label for="issn" class="form-label">ISSN</label>
@@ -50,9 +50,7 @@
                                 <button type="submit" class="btn btn-primary">Update Journal</button>
                               </div>
                             </div>
-                            <div class="col-12">
-                           
-                            </div>
+                             
                           </form>
                       </div>
                   </div></div>
