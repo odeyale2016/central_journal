@@ -31,9 +31,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/category/add', function () {
-        return view('cat_all');
-    })->name('cat_all');
+    
+  
      
     Route::get('/journal', function () {
         return view('journal');
@@ -47,7 +46,7 @@ Route::get('/category', [CategoryController::class, 'index'])->name('index.categ
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('/category/update/{id}', [CategoryController::class, 'update']);
 Route::get('/softdelete/category/{id}', [CategoryController::class, 'destroy']);
-
+ 
 // Journal Issues Controller
 Route::post('/issues/add', [IssueController::class, 'store'])->name('store.issue');
 Route::get('/issues', [IssueController::class, 'index'])->name('index.issue');

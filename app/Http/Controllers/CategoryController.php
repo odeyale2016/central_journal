@@ -121,4 +121,11 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('success', 'Category deleted  successful');
     }
+
+    public function showCount()
+    {
+          $categories = Category::All(); 
+         
+        return view('dashboard', compact('categories'));
+    }
 }

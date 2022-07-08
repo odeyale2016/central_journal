@@ -29,23 +29,29 @@
                         <div class="card-header">
   <strong>Edit submission</strong> </div>
                           <div class="card-body">
-                          <form method="POST" action="{{url('submission/update/'.$submission->id)}} ">
+                          <form method="POST" action="{{url('submission/update/'.$submissions->id)}} ">
                             @csrf
                             <div class="col-md-6">
                               <label for="title" class="form-label">Title</label>
                               <input type="text" class="form-control" id="title" name="title" value="{{$submissions->title}}">
                             </div>
                             <div class="col-md-6">
-                              <label for="volume" class="form-label">Volume</label>
-                              <input type="text" class="form-control" id="volume" name="volume"value="{{$submissions->volume}}">
+                              <label for="author" class="form-label">Author</label>
+                              <input type="text" class="form-control" id="volume" name="author"value="{{$submissions->author}}">
                             </div>
                             <div class="col-6">
-                              <label for="number" class="form-label">Number</label>
-                              <input type="text" class="form-control" id="number" name="number" value="{{$submissions->number}}">
+                              <label for="pages" class="form-label">Pages</label>
+                              <input type="text" class="form-control" id="pages" name="pages" value="{{$submissions->pages}}">
                             </div>
                             <div class="col-6">
-                              <label for="year" class="form-label">Year</label>
-                              <input type="text" class="form-control" id="year" name="year" value="{{$submissions->year}}">
+                              <div class="mb-3">
+                                <label for="abstract" class="form-label">Abstract</label>
+                                <textarea class="form-control" id="abstract" rows="5" name="abstract">{{$submissions->abstract}}</textarea>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <label for="year" class="form-label">Keywords</label>
+                              <input type="text" class="form-control" id="keywords" name="keywords" value="{{$submissions->keywords}}">
                             </div>
                             <div class="col-6">
                               <label for="date" class="form-label">Date Published</label>

@@ -84,7 +84,8 @@ class SubmissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $submissions=Submission::find($id);
+        return view('admin.submission.edit', compact('submissions'));
     }
 
     /**
@@ -96,7 +97,18 @@ class SubmissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $submissions=Submission::findorFail($id);
+        $submissions->update($request->all());
+         
+
+
+        // Query Builder Update
+       // $data = array();
+      //  $data['cat_name'] = $request->cat_name;
+      //  $data['issn'] = $request->issn;
+       // $data['description'] = $request->description;
+       // DB::table('categories')->where('id', $id)->update($data);
+        return redirect()->route('index.submission')->with('success', 'Submission updated successful');
     }
 
     /**
@@ -107,6 +119,8 @@ class SubmissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Submission::findorFail($id)->delete();
+
+        return redirect()->back()->with('success', 'Submission  deleted  successful');
     }
 }
