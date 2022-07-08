@@ -23,4 +23,9 @@ class Issues extends Model
     public function category(){
         return $this->belongsTo('App\Category');
     }
+
+    public function cat(){
+        return $this->hasOne(Category::class, 'id', 'cat_id');
+    }
+
 }

@@ -22,4 +22,12 @@ class Submission extends Model
         'status',
         
     ];
+
+    public function cat(){
+        return $this->hasOne(Category::class, 'id', 'cat_id');
+    }
+
+    public function iss(){
+        return $this->hasOne(Issues::class, 'id', 'issue_id');
+    }
 }

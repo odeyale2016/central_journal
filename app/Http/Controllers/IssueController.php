@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
  
 use App\Models\Issues;
- 
+use App\Models\Category;
 use Auth;
 class IssueController extends Controller
 {
@@ -17,7 +17,8 @@ class IssueController extends Controller
     public function index()
     {
         $issues = Issues::latest()->paginate(5);
-        return view('admin.issue.index', compact('issues'));
+        $categories = Category::all();
+        return view('admin.issue.index', compact('issues', 'categories'));
     }
 
     /**
@@ -46,11 +47,13 @@ class IssueController extends Controller
         ]);
         $issue = new Issues();
         $issue->title = $request->title;
-        $issue->cat_id = Auth::user()->id;
+        $issue->cat_id = $request->journal;
         $issue->volume = $request->volume;
         $issue->number =$request->number;
         $issue->year =$request->year;
         $issue->status =$request->status;
+        $issue->startDate =$request->startDate;
+        $issue->uploaded_by = Auth::user()->id;
         $issue->save();
         return redirect()->back()->with('success', 'New Issue added successful');
     }
@@ -90,7 +93,19 @@ class IssueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       // Eloquent ORM Update
+        $issues=Issues::findorFail($id);
+        $issues->update($request->all());
+         
+
+
+        // Query Builder Update
+       // $data = array();
+      //  $data['cat_name'] = $request->cat_name;
+      //  $data['issn'] = $request->issn;
+       // $data['description'] = $request->description;
+       // DB::table('categories')->where('id', $id)->update($data);
+        return redirect()->route('index.issue')->with('success', 'Issue updated successful');
     }
 
     /**
@@ -101,6 +116,8 @@ class IssueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Issues::findorFail($id)->delete();
+
+        return redirect()->back()->with('success', 'Issue deleted  successful');
     }
 }

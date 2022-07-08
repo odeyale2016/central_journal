@@ -23,6 +23,7 @@ class Issues extends Migration
         $table->string('startDate');
         $table->string('status');
         $table->timestamps();
+        $table->integer('uploaded_by');
     });
     }
 

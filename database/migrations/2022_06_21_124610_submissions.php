@@ -18,14 +18,15 @@ class Submissions extends Migration
             $table->string('title');
             $table->integer('cat_id');
             $table->integer('issue_id');
-            $table->integer('pages');
+            $table->string('pages');
             $table->string('author');
-            $table->string('abstract');
-            $table->string('keywords');
-            $table->string('pdf_link');
+            $table->longText('abstract');
+            $table->longText('keywords');
+            $table->longText('pdf_link');
             $table->string('startDate');
             $table->string('status');
             $table->timestamps();
+            $table->integer('uploaded_by');
         });
     }
 

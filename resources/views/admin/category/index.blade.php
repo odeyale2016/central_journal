@@ -6,7 +6,70 @@
          
     </x-slot>
     
-    
+    <div class="py-12">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+           
+            <div class="container">
+                <div class="row">
+                    <div class="card">
+                      
+                      @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+           </ul>
+         </div>
+          @endif
+                      @if (session('success'))
+                      <div class="mb-4 font-medium text-sm text-green-600">
+                          {{ __('A new Journal has been created successful.') }}
+                      </div>
+                       @endif
+                      <div class="card-header">
+<strong>Add New Journal</strong> </div>
+                        <div class="card-body">
+                        <form method="POST" action="{{ route('store.category') }}">
+                          @csrf
+                          <div class="col-md-6">
+                            <label for="journalName" class="form-label">Journal Name</label>
+                            <input type="text" class="form-control" id="cat_name" name="cat_name">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="issn" class="form-label">ISSN</label>
+                            <input type="text" class="form-control" id="issn" name="issn">
+                          </div>
+                          <div class="col-6">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="">
+                          </div>
+                          <div class="col-6">
+                            <label for="status" class="form-label">Status</label>
+                          <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm example" name="status">
+                            <option selected>Select Status</option>
+                            <option >Published</option>
+                            <option  >Unpublished</option>
+                             
+                          </select>
+                        </div>    
+                           
+                          <div class="col-12">
+                            <label for="" class="form-label"></label>
+                              <button type="submit" class="btn btn-primary">Add New Journal</button>
+                            </div>
+                          </div>
+                          
+                         
+                        
+                        </form>
+                    </div>
+                </div></div>
+                    </div>
+                </div>
+          </div>
+      </div>
+  </div>
 
     <!--- Next Row -->
     <div class="py-12">
@@ -34,10 +97,11 @@
                               <th scope="col">UserName</th>
                               <th scope="col">ISSN</th>
                               <th scope="col">Description</th>
+                              <th scope="col">Status</th>
                               <th scope="col">Date</th>
                                
                              <th>Action</th>
-                                                
+                             <th> </th>                  
                             </tr>
                           </thead>
                           <tbody>
@@ -50,16 +114,12 @@
                               <td>{{ $category->user->name}}</td>
                               <td>{{ $category->issn}}</td>
                               <td>{{ $category->description}}</td>
+                              <td>{{ $category->status}}</td>
                               <td>{{ $category->created_at->diffForHumans()}}</td>
-                             <td><a href="{{url('category/edit/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a>
-                                <!--<td><a href="class="btn btn-danger>Delete</a>
-                                  <a href="class="btn btn-info>Edit</a></td>-->
-                                <div style="height:25px;"></div>
-                              <form class="form-group pull-right" method="post" action="/admin/category/{{$category->id}}">
-                                 {{csrf_field()}}
-                                 <input type="hidden" name="_method" value="DELETE">
-                             <input type="submit" value="Delete" class="btn btn-danger" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">
-                                 </form> 
+                             <td><a href="{{url('category/edit/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a> </td>
+                              <td> <a href="{{url('softdelete/category/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Del</span></a>
+ 
+                               
                                  </td>
 
                             </tr>
@@ -76,4 +136,10 @@
           </div>
       </div>
   </div>
+
+
+
+  <!-- Trash Part -->
+  <!--- Next Row -->
+  
 </x-app-layout>

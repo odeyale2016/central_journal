@@ -17,13 +17,13 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('store.category') }}" :active="request()->routeIs('store.category')">
+                    <x-jet-nav-link href="{{ route('index.category') }}" :active="request()->routeIs('index.category')">
                         {{ ('Add Journal') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('issue.add') }}" :active="request()->routeIs('issue.add')">
-                        {{ ('New Issue') }}
+                    <x-jet-nav-link href="{{ route('index.issue') }}" :active="request()->routeIs('index.issue')">
+                        {{ ('Issues') }}
                     </x-jet-nav-link>
                         
             </div>

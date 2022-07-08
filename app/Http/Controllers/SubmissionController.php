@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Issues;
 use App\Models\Submission;
 use Auth;
 
@@ -15,7 +17,12 @@ class SubmissionController extends Controller
      */
     public function index()
     {
-        //
+          $categories = Category::All(); 
+          $issues = Issues::All(); 
+        //$categories = Category::latest()->get();
+        $submissions = Submission::latest()->paginate(5);
+       // $catDel = Category::onlyTrashed()->latest()->paginate(3);
+        return view('admin.submission.index', compact('categories', 'issues', 'submissions'));
     }
 
     /**
@@ -37,21 +44,23 @@ class SubmissionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|unique:submissionss|max:255',
-            'volume' => 'required',
-            'year' => 'required',
-            'number' => 'required',
+            'title' => 'required|unique:submissions|max:255',
+            'pages' => 'required',
+            'abstract' => 'required',
+            'author' => 'required',
         ]);
         $submissions = new Submission();
         $submissions->title = $request->title;
-        $submissions->cat_id = Auth::user()->id;
-        $submissions->issue_id = Auth::user()->id;
+        $submissions->cat_id = $request->journal;
+        $submissions->issue_id = $request->issue;
         $submissions->pages = $request->pages;
         $submissions->author =$request->author;
         $submissions->abstract =$request->abstract;
         $submissions->keywords =$request->keywords;
-        $submissions->pdf_link =$request->pdf_links;
+        $submissions->pdf_link ='https://www.kalzumeus.com/2011/10/28/dont-call-yourself-a-programmer/';
         $submissions->startDate =$request->startDate;
+        $submissions->status =$request->status;
+        $submissions->uploaded_by = Auth::user()->id;
         $submissions->save();
         return redirect()->back()->with('success', 'New submissions added successful');
     }
@@ -64,8 +73,7 @@ class SubmissionController extends Controller
      */
     public function show($id)
     {
-        $submissions = Submission::latest()->paginate(5);
-        return view('admin.submission.index', compact('submissions'));
+       
     }
 
     /**

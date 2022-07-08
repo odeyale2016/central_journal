@@ -18,8 +18,9 @@ class Categories extends Migration
         $table->Integer('user_id');
         $table->string('issn');
         $table->string('description');
+        $table->string('status');
         $table->timestamps();
-        
+        $table->softDeletes();
     });
     }
 

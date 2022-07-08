@@ -7,6 +7,7 @@ use App\Models\Category;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+
 class CategoryController extends Controller
 {
     /**
@@ -19,6 +20,7 @@ class CategoryController extends Controller
         // $categories = Category::All(); 
         //$categories = Category::latest()->get();
         $categories = Category::latest()->paginate(5);
+       // $catDel = Category::onlyTrashed()->latest()->paginate(3);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -48,6 +50,7 @@ class CategoryController extends Controller
         $category->cat_name = $request->cat_name;
         $category->issn = $request->issn;
         $category->description = $request->description;
+        $category->status = $request->status;
         $category->user_id = Auth::user()->id;
         $category->save();
         return redirect()->back()->with('success', 'New Journal added successful');
@@ -74,7 +77,7 @@ class CategoryController extends Controller
     {
         // for Eloquent ORM Edit
         $categories=Category::findorFail($id);
-
+       
         //for query Builder Edit
         //$categories = DB::table('categories')->where('id', $id)->first();
         return view('admin.category.edit', compact('categories'));
@@ -92,8 +95,9 @@ class CategoryController extends Controller
         // Eloquent ORM Update
         //$categories=Category::findorFail($id);
         //$categories->update($request->all());
-        //session()->flash('message','Records updated Successfully');
-        //return redirect('admin/category'); 
+         
+
+
         // Query Builder Update
         $data = array();
         $data['cat_name'] = $request->cat_name;
@@ -113,6 +117,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Category::findorFail($id)->delete();
+
+        return redirect()->back()->with('success', 'Category deleted  successful');
     }
 }
