@@ -19,6 +19,7 @@ class Categories extends Migration
         $table->string('issn');
         $table->string('description');
         $table->string('status');
+        $table->string('journal_image');
         $table->timestamps();
         $table->softDeletes();
     });

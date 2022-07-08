@@ -44,6 +44,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'cat_name' => 'required|unique:categories|max:255',
+            'journal_image' => 'required|mimes: jpg,png,jpeg,gif',
             'description' => 'required',
         ]);
         $category = new Category();
@@ -122,10 +123,5 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Category deleted  successful');
     }
 
-    public function showCount()
-    {
-          $categories = Category::All(); 
-         
-        return view('dashboard', compact('categories'));
-    }
+   
 }

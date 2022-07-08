@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,3 +61,9 @@ Route::get('/submission', [SubmissionController::class, 'index'])->name('index.s
 Route::get('/submission/edit/{id}', [SubmissionController::class, 'edit']);
 Route::post('/submission/update/{id}', [SubmissionController::class, 'update']);
 Route::get('/softdelete/submission/{id}', [SubmissionController::class, 'destroy']);
+
+// Dashboard Controller routes
+Route::get('/dashboard', [DashboardController::class, 'showCount'])->name('dashboard');
+
+// Homepage  Controller routes
+Route::get('/', [HomePageController::class, 'create']);

@@ -30,7 +30,7 @@
                       <div class="card-header">
 <strong>Add New Journal</strong> </div>
                         <div class="card-body">
-                        <form method="POST" action="{{ route('store.category') }}">
+                        <form method="POST" action="{{ route('store.category') }}" enctype="multipart/form-data">
                           @csrf
                           <div class="col-md-6">
                             <label for="journalName" class="form-label">Journal Name</label>
@@ -39,6 +39,10 @@
                           <div class="col-md-6">
                             <label for="issn" class="form-label">ISSN</label>
                             <input type="text" class="form-control" id="issn" name="issn">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="journal_image" class="form-label">Journal Image</label>
+                            <input type="file" class="form-control" id="journal_image" name="journal_image">
                           </div>
                           <div class="col-6">
                             <label for="description" class="form-label">Description</label>
