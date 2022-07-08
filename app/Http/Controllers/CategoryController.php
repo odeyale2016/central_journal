@@ -47,8 +47,17 @@ class CategoryController extends Controller
             'journal_image' => 'required|mimes: jpg,png,jpeg,gif',
             'description' => 'required',
         ]);
+        $journal_image = $request->file('journal_image');
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($journal_image->getClientOriginalExtension());
+        $img_name = $name_gen.'.'.$img_ext;
+        $up_location = 'assets/images/journals/';
+        $last_img = $up_location.$img_name;
+        $journal_image->move($up_location,$img_name);
+
         $category = new Category();
         $category->cat_name = $request->cat_name;
+        $category->journal_image = $last_img;
         $category->issn = $request->issn;
         $category->description = $request->description;
         $category->status = $request->status;

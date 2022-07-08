@@ -41,9 +41,10 @@
                             <input type="text" class="form-control" id="issn" name="issn">
                           </div>
                           <div class="col-md-6">
+                            <div class="form-group">
                             <label for="journal_image" class="form-label">Journal Image</label>
-                            <input type="file" class="form-control" id="journal_image" name="journal_image">
-                          </div>
+                            <input type="file" class="form-control" id="journal_image" name="journal_image" class="form-control">
+                          </div></div>
                           <div class="col-6">
                             <label for="description" class="form-label">Description</label>
                             <input type="text" class="form-control" id="description" name="description" placeholder="">
@@ -97,7 +98,8 @@
                           <thead>
                             <tr>
                               <th scope="col">#</th>
-                              <th scope="col">Category Name</th>
+                              <th scope="col">Category  </th>
+                              <th scope="col">Cover Image</th>
                               <th scope="col">UserName</th>
                               <th scope="col">ISSN</th>
                               <th scope="col">Description</th>
@@ -115,6 +117,7 @@
                             <tr>
                               <th scope="row">{{ $k++ }}</th>
                               <td> {{ $category->cat_name}}</td>
+                              <td> <img src="{{ $category->journal_image}}" width="100px" height="40px"></td>
                               <td>{{ $category->user->name}}</td>
                               <td>{{ $category->issn}}</td>
                               <td>{{ $category->description}}</td>
