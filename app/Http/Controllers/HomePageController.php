@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Issues;
 use App\Models\Submission;
+
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller

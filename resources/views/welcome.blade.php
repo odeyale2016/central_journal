@@ -227,35 +227,20 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="section-heading">
-            <h4>  <em>Current</em> Issues</h4>
-            <img src="assets/images/heading-line-dec.png" alt="">
-            <p>Our Academic Journal provides information on the latest emerging trends and developments in these ever-expanding subjects.</p>
+            <h4>  <em>Latest</em> Journals</h4>
+            @foreach($categories as $category)
+            <img src="{{asset($category->journal_image)}}" alt="Central Journal" width="300px" height="400px">
+            <p>{{$category->description}}</p>
           </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal Education</a></h4>
-                <p>ISSN: 2756-4452</p>
+                <h4><a href="#">{{$category->cat_name}}</a></h4>
+                <p>ISSN: {{$category->issn}}</p>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal of Business Education </a></h4>
-                <p>ISSN: 2811-1494</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Springboard Journal</a></h4>
-                <p>ISSN: 2333-4444</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal of Pure & Applied Sciences</a></h4>
-                <p>ISSN: 2488-8834</p>
-              </div>
-            </div>
+            @endforeach
+            
             <div class="col-lg-12">
               
               <div class="gradient-button">
@@ -279,35 +264,19 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="section-heading">
-            <h4>  <em>Our</em> Archives</h4>
+            <h4>  <em>Current</em> Issues</h4>
             <img src="assets/images/heading-line-dec.png" alt="">
             <p>Our Academic Journal provides information on the latest emerging trends and developments in these ever-expanding subjects.</p>
           </div>
           <div class="row">
+            @foreach($issues as $issue)
             <div class="col-lg-6">
               <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal Education</a></h4>
-                <p>ISSN: 2756-4452</p>
+                <h4><a href="#">{{$issue->title}}</a></h4>
+                <p>Year: {{$issue->year}}</p>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal of Business Education </a></h4>
-                <p>ISSN: 2811-1494</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Springboard Journal</a></h4>
-                <p>ISSN: 2333-4444</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Al-Hikmah Journal of Pure & Applied Sciences</a></h4>
-                <p>ISSN: 2488-8834</p>
-              </div>
-            </div>
+            @endforeach
             <div class="col-lg-12">
               
               <div class="gradient-button">

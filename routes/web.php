@@ -6,6 +6,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomePageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

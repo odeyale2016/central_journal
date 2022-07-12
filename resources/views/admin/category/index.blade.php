@@ -124,7 +124,7 @@
                               <td>{{ $category->status}}</td>
                               <td>{{ $category->created_at->diffForHumans()}}</td>
                              <td><a href="{{url('category/edit/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#000046; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Edit</span></a> </td>
-                              <td> <a href="{{url('softdelete/category/'.$category->id)}}"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Del</span></a>
+                              <td> <a href="{{url('softdelete/category/'.$category->id)}}" onclick="return confirm('Are you sure you want to delete the journal')"><span class="alert alert-primary" style="padding-top:5px; padding-bottom:5px; background-color:#990000; border-bottom:thick solid #000022; border-radius:2px;color:#fff;">Del</span></a>
  
                                
                                  </td>

@@ -29,7 +29,7 @@
                       <div class="card-header">
 <strong>Edit Issue</strong> </div>
                         <div class="card-body">
-                        <form method="POST" action="{{url('issue/update/'.$issues->id)}} ">
+                        <form method="POST" action="{{url('issue/update/'.$issues->id)}} " enctype="multipart/form-data">
                           @csrf
                           <div class="col-md-6">
                             <label for="title" class="form-label">Title</label>

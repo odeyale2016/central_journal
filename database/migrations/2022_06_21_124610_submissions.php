@@ -19,7 +19,7 @@ class Submissions extends Migration
             $table->integer('cat_id');
             $table->integer('issue_id');
             $table->string('pages');
-            $table->string('author');
+            $table->longText('author');
             $table->longText('abstract');
             $table->longText('keywords');
             $table->longText('pdf_link');

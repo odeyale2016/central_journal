@@ -7,7 +7,7 @@ use App\Models\Category;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Image;
 class CategoryController extends Controller
 {
     /**
@@ -48,12 +48,17 @@ class CategoryController extends Controller
             'description' => 'required',
         ]);
         $journal_image = $request->file('journal_image');
-        $name_gen = hexdec(uniqid());
-        $img_ext = strtolower($journal_image->getClientOriginalExtension());
-        $img_name = $name_gen.'.'.$img_ext;
-        $up_location = 'assets/images/journals/';
-        $last_img = $up_location.$img_name;
-        $journal_image->move($up_location,$img_name);
+        
+        // $name_gen = hexdec(uniqid());
+        // $img_ext = strtolower($journal_image->getClientOriginalExtension());
+        // $img_name = $name_gen.'.'.$img_ext;
+        // $up_location = 'assets/images/journals/';
+        // $last_img = $up_location.$img_name;
+        // $journal_image->move($up_location,$img_name);
+
+        $name_gen = hexdec(uniqid()).'.'.$journal_image->getClientOriginalExtension();
+        Image::make($journal_image)->resize(300,300)->save('assets/images/journals/'.$name_gen);
+        $last_img = 'assets/images/journals/'.$name_gen;
 
         $category = new Category();
         $category->cat_name = $request->cat_name;
@@ -64,6 +69,9 @@ class CategoryController extends Controller
         $category->user_id = Auth::user()->id;
         $category->save();
         return redirect()->back()->with('success', 'New Journal added successful');
+      
+           
+         
     }
 
     /**
@@ -109,14 +117,49 @@ class CategoryController extends Controller
 
 
         // Query Builder Update
+        // $data = array();
+        // $data['cat_name'] = $request->cat_name;
+        // $data['issn'] = $request->issn;
+        // $data['description'] = $request->description;
+        // DB::table('categories')->where('id', $id)->update($data);
+        // return redirect()->route('index.category')->with('success', 'Category updated successful');
+
+        $validated = $request->validate([
+            'cat_name' => 'required',
+            'journal_image' => 'mimes: jpg,png,jpeg,gif',
+            
+        ]);
+        
+        $old_image = $request->old_image;
+        $journal_image = $request->file('journal_image');
+        if($journal_image){
+            unlink($old_image);
+        $name_gen = hexdec(uniqid());
+        $img_ext = strtolower($journal_image->getClientOriginalExtension());
+        $img_name = $name_gen.'.'.$img_ext;
+        $up_location = 'assets/images/journals/';
+        $last_img = $up_location.$img_name;
+        $journal_image->move($up_location,$img_name);
+    
+       
         $data = array();
         $data['cat_name'] = $request->cat_name;
+        $data['journal_image'] = $last_img;
         $data['issn'] = $request->issn;
         $data['description'] = $request->description;
+        $data['status'] = $request->status;
         DB::table('categories')->where('id', $id)->update($data);
-        return redirect()->route('index.category')->with('success', 'Category updated successful');
-
-        
+       
+        return redirect()->back()->with('success', 'Journal updated successful');
+        }else{
+            $data = array();
+            $data['cat_name'] = $request->cat_name;
+            
+            $data['issn'] = $request->issn;
+            $data['description'] = $request->description;
+            $data['status'] = $request->status;
+                return redirect()->back()->with('success', 'Journal updated successful'); 
+        }
     }
 
     /**
@@ -127,7 +170,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Category::findorFail($id)->delete();
+        $image = Category::find($id);
+        $old_image = $image->journal_image;
+        unlink($old_image);
+        Category::findorFail($id)->delete();
 
         return redirect()->back()->with('success', 'Category deleted  successful');
     }
