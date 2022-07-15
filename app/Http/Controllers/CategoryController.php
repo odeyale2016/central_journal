@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Multipic;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -178,5 +179,26 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Category deleted  successful');
     }
 
+    public function AddImage(Request $request){
+        $images = $request->file('image');
+        foreach($images as $multipic){
+        $name_gen = hexdec(uniqid()).'.'.$multipic->getClientOriginalExtension();
+        Image::make($multipic)->resize(300,300)->save('assets/images/gallery/'.$name_gen);
+        $last_img = 'assets/images/gallery/'.$name_gen;
+
+        $multipic = new Multipic();
+        
+        $multipic->image = $last_img;
+       
+        $multipic->save();
+        } // end of multipic 
+        return redirect()->back()->with('success', 'New Gallery added successful');
+    }
+
+    public function MultiImage(){
+        $images = Multipic::All();
+        
+        return view('admin.image.index', compact('images'));
+    }
    
 }

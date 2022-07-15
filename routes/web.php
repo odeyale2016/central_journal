@@ -17,6 +17,9 @@ use App\Http\Controllers\HomePageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,6 +65,13 @@ Route::get('/submission', [SubmissionController::class, 'index'])->name('index.s
 Route::get('/submission/edit/{id}', [SubmissionController::class, 'edit']);
 Route::post('/submission/update/{id}', [SubmissionController::class, 'update']);
 Route::get('/softdelete/submission/{id}', [SubmissionController::class, 'destroy']);
+
+
+// Journal Categories Controller
+Route::post('/image/add', [CategoryController::class, 'AddImage'])->name('addImage.category');
+
+Route::get('/image', [CategoryController::class, 'MultiImage'])->name('MultiImage.category');
+
 
 // Dashboard Controller routes
 Route::get('/dashboard', [DashboardController::class, 'showCount'])->name('dashboard');
